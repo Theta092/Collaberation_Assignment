@@ -10,7 +10,8 @@ public class Collaberation {
 		// TODO Auto-generated method stub
 		System.out.print("hi");
 		
-		System.out.println("hfhjhdfdkhdfkdjfhdfkjdshds kjsshfdskfhsfhskjfhfs dskjfdshfkjsfhs");
+		System.out.println("hfhjhdfdkhdfkdjfhdfkjdshds kjsshfdskfhsfhskjfhfs"
+				+ "b dskjfdshfkjsfhs");
 	}
 
 }

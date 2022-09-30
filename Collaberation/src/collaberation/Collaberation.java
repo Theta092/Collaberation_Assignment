@@ -13,8 +13,8 @@ public class Collaberation {
 		Scanner input = new Scanner(System.in);
 		System.out.println("hi");
 		//iuaaavgycexzhfalmewmrxnhdscLFISMEf
-		System.out.println("hfhjhdfdkhdfkdjfhdfkjdshds kjsshfdskfhsfhskjfhfs\nb dskjfdshfkjsfhs");
-		System.out.println("happi");
+		System.out.println("I will ask you for a number.");
+		System.out.println("Pleas comply.");
 		
 		int bread = 3;
 		bread ++;

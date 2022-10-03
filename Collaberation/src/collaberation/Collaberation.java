@@ -15,10 +15,8 @@ public class Collaberation {
 		//iuaaavgycexzhfalmewmrxnhdscLFISMEf
 		System.out.println("I will ask you for a number.");
 		System.out.println("Pleas comply.");
-		
-		int bread = 3;
-		bread ++;
-		System.out.print("pick a number: ");
+
+		System.out.print("\npick a number: ");
 		System.out.println("You chose " + input.nextInt());
 	}
 

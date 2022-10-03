@@ -4,7 +4,9 @@
  * testing
  */
 package collaberation;
+
 import java.util.Scanner;
+
 public class Collaberation {
 
 	public static void main(String[] args) {

@@ -1,5 +1,6 @@
 /*
  * Nicholas Rempel
+ * logan sawatzky
  * testing
  */
 package collaberation;
@@ -14,10 +15,16 @@ public class Collaberation {
 		System.out.println("hi");
 		System.out.println("I will ask you for a number.");
 		System.out.println("Pleas comply.");
+		
 		System.out.print("\nPick a number: ");
 		num = input.nextInt();
 		System.out.println("You chose " + input.nextInt());
 		System.out.println("the number you chose was " + 1);
+		
+		for(int i = 0; i < 10; i++)
+		{
+			System.out.println(i);
+		}
 	}
 
 }

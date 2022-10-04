@@ -1,11 +1,13 @@
 package collaberation;
+import java.util.ArrayList;
 
 public class Life {
 	
+	ArrayList<Integer> aliveNeighbors = new ArrayList<Integer>();
+	ArrayList<Integer> deadNeighbors = new ArrayList<Integer>();
+	
 	int gridSizeX;
 	int gridSizeY;
-	int aliveNeighbors = 2;
-	int deadNeighbors;
 	boolean[][] cellState;
 	boolean[][] newCellState;
 	
@@ -31,6 +33,7 @@ public class Life {
 		return cellState[x][y];
 	}
 	
+	//changes cell states based on requirements
 	public void updateCellStates()
 	{
 		int neighbours = 0;
@@ -56,31 +59,95 @@ public class Life {
 						}
 					}
 					//checks if there are two or three neighbours
-					if(neighbours == aliveNeighbors)
+					for(int h = 0; h < aliveNeighbors.size(); h++ )
 					{
-						newCellState[i][j] = true;
-					}
-					else
-					{
-						newCellState[i][j] = false;
+						if(neighbours == aliveNeighbors.get(h))
+						{
+							newCellState[i][j] = true;
+						}
+						else
+						{
+							newCellState[i][j] = false;
+						}
 					}
 				}
 				//if the cell is not alive
 				else
 				{
-					
+					neighbours = 0;
+					for(int a = -1; a <= 1; a++)
+					{
+						for(int b = -1; b <= 1; b++)
+						{
+							if(a != 0 && b != 0)
+							{
+								if(i + a >= 0 && j + b >= 0 && i + a < gridSizeX && j + b < gridSizeY)
+								{
+									if(cellState[i + a][j + b])
+									{
+										neighbours ++;
+									}
+								}
+							}
+						}
+					}
+					for(int h = 0; h < deadNeighbors.size(); h++ )
+					{
+						if(neighbours == deadNeighbors.get(h))
+						{
+							newCellState[i][j] = true;
+						}
+						else
+						{
+							newCellState[i][j] = false;
+						}
+					}
 				}
+			}
+		}
+		//sets the grid to the new one
+		for(int i = 0; i < cellState.length; i++)
+		{
+			for(int j = 0; j < cellState.length; j++)
+			{
+				cellState[i][j] = newCellState[i][j];
 			}
 		}
 	}
 	
-	public void changeAliveRequirements(int surroundingCellCount)
+	//add options for cells becoming alive
+	public void addAliveRequirements(int surroundingCellCount)
 	{
-		
+		aliveNeighbors.add(surroundingCellCount);
 	}
 	
-	public void changeDeadRequirements(int surroundingCellCount)
+	//remove options for cells becoming alive
+	public void removeAliveRequirements(int surroundingCellCount)
 	{
-		
+		aliveNeighbors.remove(surroundingCellCount);
+	}
+	
+	//reset options for cells becoming alive to null
+	public void resetAliveRequirements(int surroundingCellCount)
+	{
+		aliveNeighbors.replaceAll(null);
+	}
+	
+	//add options for cells becoming dead
+	public void addDeadRequirements(int surroundingCellCount)
+	{
+		deadNeighbors.add(surroundingCellCount);
+	}
+	
+	//remove options for cells becoming dead
+	public void removeDeadRequirements(int surroundingCellCount)
+	{
+		deadNeighbors.remove(surroundingCellCount);
+	}
+	
+	//reset options for cells becoming dead
+	public void resetDeadRequirements(int surroundingCellCount)
+	{
+		deadNeighbors.replaceAll(null);
 	}
 }

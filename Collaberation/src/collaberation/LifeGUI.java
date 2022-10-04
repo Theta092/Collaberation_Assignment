@@ -27,10 +27,10 @@ public class LifeGUI {
 			for(int j=0; j<cell[1].length; j++) {
 				cell[i][j] = new JButton();
 				cell[i][j].setActionCommand(a[i][j]);
-				cell[i][j]addActionListener(new ActionListener() {
+				cell[i][j].addActionListener(new ActionListener() {
 
 					@Override
-					public void actionPerformed(ActionEvent e) {				
+					public void actionPerformed(ActionEvent e) {		
 					}	
 				});
 			}

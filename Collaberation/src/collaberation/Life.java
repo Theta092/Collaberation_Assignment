@@ -21,6 +21,29 @@ public class Life {
 	boolean[][] cellState;
 	boolean[][] newCellState;
 	
+	public Life()
+	{
+		gridSizeX = 20;
+		gridSizeY = 20;
+		cellState = new boolean[gridSizeX][gridSizeY];
+		newCellState = new boolean[gridSizeX][gridSizeY];
+		for(int i = 0; i < cellState.length; i++)
+		{
+			for(int j = 0; j < cellState[0].length; j++)
+			{
+				cellState[i][j] = false;
+				newCellState[i][j] = cellState[i][j];
+			}
+		}
+		
+		//set default values for aliveNeighbors
+		aliveNeighbors.add(2);
+		aliveNeighbors.add(3);
+		
+		//set default values for aliveNeighbors
+		deadNeighbors.add(2);
+	}
+	
 	public Life(int x, int y)
 	{
 		gridSizeX = x;

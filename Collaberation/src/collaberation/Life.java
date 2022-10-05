@@ -35,6 +35,13 @@ public class Life {
 				newCellState[i][j] = cellState[i][j];
 			}
 		}
+		
+		//set default values for aliveNeighbors
+		aliveNeighbors.add(2);
+		aliveNeighbors.add(3);
+		
+		//set default values for aliveNeighbors
+		deadNeighbors.add(2);
 	}
 	
 	//true = alive, false = dead

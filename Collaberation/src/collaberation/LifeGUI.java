@@ -37,7 +37,7 @@ public class LifeGUI {
 				cell[i][j].addActionListener(new ActionListener() {
 
 					@Override
-					public void actionPerformed(ActionEvent e) {				
+					public void actionPerformed(ActionEvent e) {		
 					}	
 				});
 				c.gridx = 1;

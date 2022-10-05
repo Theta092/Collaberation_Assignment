@@ -28,7 +28,7 @@ public class LifeGUI {
 		panel = new JPanel(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		
-		label = new JLabel("what is the x value of the grid");
+		quest = new JTextField("what is the x value of the grid");
 		
 		for(int i=0; i<cell[0].length; i++) {
 			for(int j=0; j<cell[1].length; j++) {
@@ -42,7 +42,7 @@ public class LifeGUI {
 				});
 				c.gridx = 1;
 				c.gridy = 4;
-				panel.add(label,c);
+				panel.add(quest,c);
 				frame.setContentPane(panel);
 				frame.setVisible(true);
 			}

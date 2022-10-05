@@ -53,7 +53,7 @@ public class LifeGUI {
 		a = new String[x][y];
 		
 		
-		for(int i=0; i<cell[0].length; i++) {
+		for(int i=0; i<cell.length; i++) {
 			for(int j=0; j<cell[1].length; j++) {
 				cell[i][j] = new JButton();
 				cell[i][j].setActionCommand(a[i][j]);

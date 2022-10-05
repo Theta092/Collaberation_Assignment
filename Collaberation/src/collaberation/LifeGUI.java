@@ -20,6 +20,7 @@ public class LifeGUI {
 		frame.setSize(1000,1000);
 		frame.setLocationRelativeTo(null);
 		
+		
 		panel = new JPanel(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		
@@ -34,7 +35,6 @@ public class LifeGUI {
 					}	
 				});
 			}
-		}
-		
+		}		
 	}
 }

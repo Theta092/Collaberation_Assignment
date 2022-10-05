@@ -21,7 +21,7 @@ public class LifeGUI {
 	Scanner input = new Scanner(System.in);
 	Life life = new Life(0, 0);
 	JFrame frame;
-	JPanel panel;
+	JPanel panel, begin, run;
 	JLabel label;
 	JButton start;
 	JButton[][] cell;
@@ -37,18 +37,20 @@ public class LifeGUI {
 		frame.setLocationRelativeTo(null);
 		
 		
-		panel = new JPanel(new GridBagLayout());
+		panel = new JPanel();
+		
+		begin = new JPanel(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		
 		questx = new JTextField(10);
 		c.gridx = 1;
 		c.gridy = 4;
-		panel.add(questx,c);
+		begin.add(questx,c);
 		
 		questy = new JTextField(10);
 		c.gridx = 1;
 		c.gridy = 5;
-		panel.add(questy,c);
+		begin.add(questy,c);
 		
 		cell = new JButton[x][y];
 		a = new String[x][y];
@@ -63,11 +65,15 @@ public class LifeGUI {
 				
 				num = questy.getText();
 				y = Integer.valueOf(num);
+				run.setVisible(true);
+				begin.setVisible(false);
 			}
 		});
 		c.gridx = 3;
 		c.gridy = 7;
-		panel.add(start,c);
+		begin.add(start,c);
+		
+		run = new JPanel
 		
 		for(int i=0; i<cell.length; i++) {
 			for(int j=0; j<cell[1].length; j++) {
@@ -81,6 +87,14 @@ public class LifeGUI {
 				});
 			}
 		}
+		
+		
+		begin.setVisible(true);
+		run.setVisible(false);
+		
+		panel.add(begin);
+		panel.add(run);
+		
 		frame.setContentPane(panel);
 		frame.setVisible(true);
 	}

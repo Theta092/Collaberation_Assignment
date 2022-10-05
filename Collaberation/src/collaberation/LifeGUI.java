@@ -17,6 +17,7 @@ public class LifeGUI {
 	JButton[][] cell;
 	String[][] a = new String[0][0];
 	int x, y;
+	String num;
 	JTextField quest;
 
 	public LifeGUI() {
@@ -29,7 +30,19 @@ public class LifeGUI {
 		panel = new JPanel(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		
-		quest = new JTextField("what is the x value of the grid");
+		quest = new JTextField(10);
+		c.gridx = 1;
+		c.gridy = 4;
+		panel.add(quest,c);
+		
+		quest = new JTextField(10);
+		c.gridx = 1;
+		c.gridy = 5;
+		panel.add(quest,c);
+		
+		cell = new JButton[x][y];
+		a = new String[x][y];
+		
 		
 		for(int i=0; i<cell[0].length; i++) {
 			for(int j=0; j<cell[1].length; j++) {
@@ -41,12 +54,9 @@ public class LifeGUI {
 					public void actionPerformed(ActionEvent e) {		
 					}	
 				});
-				c.gridx = 1;
-				c.gridy = 4;
-				panel.add(quest,c);
-				frame.setContentPane(panel);
-				frame.setVisible(true);
 			}
 		}
+		frame.setContentPane(panel);
+		frame.setVisible(true);
 	}
 }

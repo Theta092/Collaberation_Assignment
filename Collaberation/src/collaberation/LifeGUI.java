@@ -23,11 +23,12 @@ public class LifeGUI {
 	JFrame frame;
 	JPanel panel;
 	JLabel label;
+	JButton start;
 	JButton[][] cell;
 	String[][] a = new String[0][0];
 	int x, y;
 	String num;
-	JTextField quest;
+	JTextField questx, questy;
 
 	public LifeGUI() {
 		
@@ -45,19 +46,34 @@ public class LifeGUI {
 		panel = new JPanel(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		
-		quest = new JTextField(10);
+		questx = new JTextField(10);
 		c.gridx = 1;
 		c.gridy = 4;
-		panel.add(quest,c);
+		panel.add(questx,c);
 		
-		quest = new JTextField(10);
+		questy = new JTextField(10);
 		c.gridx = 1;
 		c.gridy = 5;
-		panel.add(quest,c);
+		panel.add(questy,c);
 		
 		cell = new JButton[x][y];
 		a = new String[x][y];
 		
+		start = new JButton("start");
+		start.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				num = questx.getText();
+				x = Integer.valueOf(num);
+				
+				num = questy.getText();
+				y = Integer.valueOf(num);
+			}
+		});
+		c.gridx = 3;
+		c.gridy = 7;
+		panel.add(start,c);
 		
 		for(int i=0; i<cell.length; i++) {
 			for(int j=0; j<cell[1].length; j++) {

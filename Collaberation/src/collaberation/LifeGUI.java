@@ -32,10 +32,16 @@ public class LifeGUI {
 
 	public LifeGUI() {
 		
+		ImageIcon deadCell, aliveCell, startIcon;
+		
 		frame = new JFrame("Life");
-		frame.setSize(1000,1000);
+		frame.setSize(1000,800);
 		frame.setLocationRelativeTo(null);
 		
+		//Set Icons
+		deadCell = new ImageIcon(getClass().getClassLoader().getResource("dead cell.png"));
+		aliveCell = new ImageIcon(getClass().getClassLoader().getResource("alive cell.png"));
+		startIcon = new ImageIcon(getClass().getClassLoader().getResource("start button.png"));
 		
 		panel = new JPanel();
 		
@@ -77,7 +83,7 @@ public class LifeGUI {
 		
 		for(int i=0; i<cell.length; i++) {
 			for(int j=0; j<cell[1].length; j++) {
-				cell[i][j] = new JButton();
+				cell[i][j] = new JButton(deadCell);
 				cell[i][j].setActionCommand(a[i][j]);
 				cell[i][j].addActionListener(new ActionListener() {
 
@@ -85,6 +91,10 @@ public class LifeGUI {
 					public void actionPerformed(ActionEvent e) {		
 					}	
 				});
+				cell[i][j].setContentAreaFilled(false);
+				cell[i][j].setBorderPainted(false);
+				cell[i][j].setFocusPainted(false); 
+				cell[i][j].setOpaque(false);
 			}
 		}
 		

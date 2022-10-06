@@ -15,7 +15,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
+
 import java.util.Scanner;
 
 import javax.swing.*;
@@ -96,15 +96,17 @@ public class LifeGUI {
 
 							@Override
 							public void actionPerformed(ActionEvent e) {
-								if(life.checkCellState(i, j))
+								int x =  Integer.valueOf(e.getActionCommand()) / 100;
+								int y = Integer.valueOf(e.getActionCommand()) % 100;
+								if(life.checkCellState(x, y))
 								{
-									cell[i][j].setIcon(aliveCell);
-									life.aliveCell(i, j);
+									cell[x][y].setIcon(aliveCell);
+									life.aliveCell(x, y);
 								}
 								else
 								{
-									cell[i][j].setIcon(deadCell);
-									life.killCell(i, j);
+									cell[x][y].setIcon(deadCell);
+									life.killCell(x, y);
 								}
 							}	
 						});

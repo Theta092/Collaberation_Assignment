@@ -37,12 +37,6 @@ public class LifeGUI {
 		
 		ImageIcon deadCell, aliveCell, startIcon, startHighlightIcon;
 		
-		for(int i=0; i<x; i++) {
-			for(int j=0; j<y; j++) {
-				a[i][j] = i+""+j;
-			}
-		}
-		
 		frame = new JFrame("Life");
 		frame.setSize(1000,800);
 		frame.setLocationRelativeTo(null);
@@ -93,6 +87,12 @@ public class LifeGUI {
 				cell = new JButton[x][y];
 				a = new String[x][y];
 				
+				for(int i=0; i<x; i++) {
+					for(int j=0; j<y; j++) {
+						a[i][j] = i+""+j;
+					}
+				}
+				
 				for(int i=0; i<cell[0].length; i++) {
 					for(int j=0; j<cell[0].length; j++) {
 						System.out.println(i + " " + j);
@@ -102,8 +102,8 @@ public class LifeGUI {
 
 							@Override
 							public void actionPerformed(ActionEvent e) {
-								int x =  Integer.valueOf(e.getActionCommand()) / 100;
-								int y = Integer.valueOf(e.getActionCommand()) % 100;
+								int x =  Integer.valueOf(e.getActionCommand()) / 10;
+								int y = Integer.valueOf(e.getActionCommand()) % 10;
 								if(life.checkCellState(x, y))
 								{
 									cell[x][y].setIcon(aliveCell);

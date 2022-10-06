@@ -82,7 +82,7 @@ public class Life {
 	//make cell alive
 	public void aliveCell(int x, int y)
 	{
-		cellState[x][y] = false;
+		cellState[x][y] = true;
 	}
 	
 	//changes cell states based on requirements

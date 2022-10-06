@@ -22,7 +22,7 @@ import javax.swing.*;
 
 public class LifeGUI {
 	Scanner input = new Scanner(System.in);
-	Life life = new Life(0, 0);
+	Life life;
 	JFrame frame;
 	JPanel panel, begin, run;
 	JLabel label;
@@ -78,41 +78,37 @@ public class LifeGUI {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				num = questx.getText();
-				x = Integer.valueOf(num);
+				x = Integer.valueOf(questx.getText());
 				
-				num = questy.getText();
-				y = Integer.valueOf(num);
+				y = Integer.valueOf(questy.getText());
 				
 				cell = new JButton[x][y];
 				a = new String[x][y];
 				
-				for(int i=0; i<x; i++) {
-					for(int j=0; j<y; j++) {
-						a[i][j] = i+""+j;
-					}
-				}
+				life  = new Life(x, y);
 				
-				for(int i=0; i<cell[0].length; i++) {
+				for(int i=0; i<cell.length; i++) {
 					for(int j=0; j<cell[0].length; j++) {
 						System.out.println(i + " " + j);
 						cell[i][j] = new JButton(deadCell);
-						cell[i][j].setActionCommand(a[i][j]);
+						cell[i][j].setActionCommand(String.valueOf((i*100) + j));
 						cell[i][j].addActionListener(new ActionListener() {
 
 							@Override
 							public void actionPerformed(ActionEvent e) {
-								int x =  Integer.valueOf(e.getActionCommand()) / 10;
-								int y = Integer.valueOf(e.getActionCommand()) % 10;
+								int x =  Integer.valueOf(e.getActionCommand()) / 100;
+								int y = Integer.valueOf(e.getActionCommand()) % 100;
 								if(life.checkCellState(x, y))
 								{
-									cell[x][y].setIcon(aliveCell);
-									life.aliveCell(x, y);
+									life.killCell(x, y);
+									System.out.println(life.checkCellState(x, y));
+									cell[x][y].setIcon(deadCell);
 								}
 								else
 								{
-									cell[x][y].setIcon(deadCell);
-									life.killCell(x, y);
+									life.aliveCell(x, y);
+									System.out.println(life.checkCellState(x, y));
+									cell[x][y].setIcon(aliveCell);
 								}
 							}	
 						});

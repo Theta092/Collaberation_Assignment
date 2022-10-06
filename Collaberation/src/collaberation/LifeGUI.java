@@ -96,8 +96,8 @@ public class LifeGUI {
 		
 		run = new JPanel(new GridBagLayout());
 		
-		for(int i=0; i<cell.length; i++) {
-			for(int j=0; j<cell[1].length; j++) {
+		for(int i=0; i<x; i++) {
+			for(int j=0; j<y; j++) {
 				cell[i][j] = new JButton(deadCell);
 				cell[i][j].setActionCommand(a[i][j]);
 				cell[i][j].addActionListener(new ActionListener() {

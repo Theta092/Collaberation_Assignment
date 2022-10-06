@@ -15,6 +15,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.util.Scanner;
 
 import javax.swing.*;
@@ -34,7 +35,7 @@ public class LifeGUI {
 
 	public LifeGUI() {
 		
-		ImageIcon deadCell, aliveCell, startIcon;
+		ImageIcon deadCell, aliveCell, startIcon, startHighlightIcon;
 		
 		frame = new JFrame("Life");
 		frame.setSize(1000,800);
@@ -44,6 +45,7 @@ public class LifeGUI {
 		deadCell = new ImageIcon(getClass().getClassLoader().getResource("dead cell.png"));
 		aliveCell = new ImageIcon(getClass().getClassLoader().getResource("alive cell.png"));
 		startIcon = new ImageIcon(getClass().getClassLoader().getResource("start button.png"));
+		startHighlightIcon = new ImageIcon(getClass().getClassLoader().getResource("start button blue.png"));
 		
 		panel = new JPanel(new GridBagLayout());
 		panel.setBackground(Color.darkGray);
@@ -52,17 +54,19 @@ public class LifeGUI {
 		GridBagConstraints c = new GridBagConstraints();
 		
 		questx = new JTextField(10);
+		questx.setPreferredSize(new Dimension(96, 32));
+		questx.setOpaque(false);
 		c.gridx = 1;
 		c.gridy = 4;
 		begin.add(questx,c);
 		
 		questy = new JTextField(10);
+		questy.setPreferredSize(new Dimension(96, 32));
+		questy.setOpaque(false);
 		c.gridx = 1;
 		c.gridy = 5;
 		begin.add(questy,c);
 		
-		cell = new JButton[x][y];
-		a = new String[x][y];
 		
 		start = new JButton(startIcon);
 		start.setPreferredSize(new Dimension(96, 32));
@@ -79,32 +83,57 @@ public class LifeGUI {
 				
 				num = questy.getText();
 				y = Integer.valueOf(num);
+				
+				cell = new JButton[x][y];
+				a = new String[x][y];
+				
+				for(int i=0; i<cell[0].length; i++) {
+					for(int j=0; j<cell[0].length; j++) {
+						System.out.println(i + " " + j);
+						cell[i][j] = new JButton(deadCell);
+						cell[i][j].setActionCommand(a[i][j]);
+						cell[i][j].addActionListener(new ActionListener() {
+
+							@Override
+							public void actionPerformed(ActionEvent e) {
+								if(life.checkCellState(i, j))
+								{
+									cell[i][j].setIcon(aliveCell);
+									life.aliveCell(i, j);
+								}
+								else
+								{
+									cell[i][j].setIcon(deadCell);
+									life.killCell(i, j);
+								}
+							}	
+						});
+						cell[i][j].setPreferredSize(new Dimension(32, 32));
+						cell[i][j].setContentAreaFilled(false);
+						cell[i][j].setBorderPainted(false);
+						cell[i][j].setFocusPainted(false); 
+						cell[i][j].setOpaque(false);
+						c.gridx = i;
+						c.gridy = j;
+						run.add(cell[i][j],c);
+					}
+				}
+				
 				run.setVisible(true);
 				begin.setVisible(false);
 			}
 		});
-		c.gridx = 3;
+		c.gridx = 1;
 		c.gridy = 7;
 		begin.add(start,c);
 		
 		run = new JPanel(new GridBagLayout());
 		
-		for(int i=0; i<cell.length; i++) {
-			for(int j=0; j<cell[1].length; j++) {
-				cell[i][j] = new JButton(deadCell);
-				cell[i][j].setActionCommand(a[i][j]);
-				cell[i][j].addActionListener(new ActionListener() {
-
-					@Override
-					public void actionPerformed(ActionEvent e) {		
-					}	
-				});
-				cell[i][j].setContentAreaFilled(false);
-				cell[i][j].setBorderPainted(false);
-				cell[i][j].setFocusPainted(false); 
-				cell[i][j].setOpaque(false);
-			}
-		}
+		
+		
+		System.out.println("check");
+		
+		
 		
 		
 		begin.setVisible(true);

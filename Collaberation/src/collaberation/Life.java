@@ -73,6 +73,18 @@ public class Life {
 		return cellState[x][y];
 	}
 	
+	//make cell dead
+	public void killCell(int x, int y)
+	{
+		cellState[x][y] = false;
+	}
+	
+	//make cell alive
+	public void aliveCell(int x, int y)
+	{
+		cellState[x][y] = false;
+	}
+	
 	//changes cell states based on requirements
 	public void updateCellStates()
 	{

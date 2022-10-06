@@ -9,6 +9,8 @@
 */
 package collaberation;
 
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -43,7 +45,8 @@ public class LifeGUI {
 		aliveCell = new ImageIcon(getClass().getClassLoader().getResource("alive cell.png"));
 		startIcon = new ImageIcon(getClass().getClassLoader().getResource("start button.png"));
 		
-		panel = new JPanel();
+		panel = new JPanel(new GridBagLayout());
+		panel.setBackground(Color.darkGray);
 		
 		begin = new JPanel(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
@@ -61,7 +64,12 @@ public class LifeGUI {
 		cell = new JButton[x][y];
 		a = new String[x][y];
 		
-		start = new JButton("start");
+		start = new JButton(startIcon);
+		start.setPreferredSize(new Dimension(96, 32));
+		start.setContentAreaFilled(false);
+		start.setBorderPainted(false);
+		start.setFocusPainted(false); 
+		start.setOpaque(false);
 		start.addActionListener(new ActionListener() {
 
 			@Override

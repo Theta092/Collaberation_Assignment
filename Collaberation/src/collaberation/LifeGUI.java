@@ -79,7 +79,7 @@ public class LifeGUI {
 		c.gridy = 7;
 		begin.add(start,c);
 		
-		run = new JPanel
+		run = new JPanel(new GridBagLayout());
 		
 		for(int i=0; i<cell.length; i++) {
 			for(int j=0; j<cell[1].length; j++) {

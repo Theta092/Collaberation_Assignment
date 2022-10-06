@@ -95,6 +95,10 @@ public class LifeGUI {
 				cell[i][j].setBorderPainted(false);
 				cell[i][j].setFocusPainted(false); 
 				cell[i][j].setOpaque(false);
+				
+				c.gridx = i;
+				c.gridy = j;
+				run.add(cell[i][j],c);
 			}
 		}
 		

@@ -79,6 +79,7 @@ public class LifeGUI {
 				
 				num = questy.getText();
 				y = Integer.valueOf(num);
+				
 				run.setVisible(true);
 				begin.setVisible(false);
 			}

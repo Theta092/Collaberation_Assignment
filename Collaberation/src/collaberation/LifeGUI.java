@@ -96,9 +96,10 @@ public class LifeGUI {
 		
 		run = new JPanel(new GridBagLayout());
 		
+		
 		for(int i=0; i<x; i++) {
 			for(int j=0; j<y; j++) {
-				cell[i][j] = new JButton();
+				cell[i][j] = new JButton(deadCell);
 				cell[i][j].setActionCommand(a[i][j]);
 				cell[i][j].addActionListener(new ActionListener() {
 
@@ -110,7 +111,11 @@ public class LifeGUI {
 						w=num%10;
 					}	
 				});
-
+				cell[i][j].setContentAreaFilled(false);
+				cell[i][j].setBorderPainted(false);
+				cell[i][j].setFocusPainted(false); 
+				cell[i][j].setOpaque(false);
+				
 				c.gridx = i;
 				c.gridy = j;
 				run.add(cell[i][j],c);

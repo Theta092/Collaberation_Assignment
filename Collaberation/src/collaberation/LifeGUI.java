@@ -34,6 +34,12 @@ public class LifeGUI {
 
 	public LifeGUI() {
 		
+		for(int i=0; i<x; i++) {
+			for(int j=0; j<y; j++) {
+				a[i][j] = i+""+j;
+			}
+		}
+		
 		ImageIcon deadCell, aliveCell, startIcon;
 		
 		frame = new JFrame("Life");
@@ -97,7 +103,11 @@ public class LifeGUI {
 				cell[i][j].addActionListener(new ActionListener() {
 
 					@Override
-					public void actionPerformed(ActionEvent e) {		
+					public void actionPerformed(ActionEvent e) {	
+						int q, w;
+						int num = Integer.valueOf(e.getActionCommand());
+						q=num/10;
+						w=num%10;
 					}	
 				});
 				cell[i][j].setContentAreaFilled(false);

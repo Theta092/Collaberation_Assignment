@@ -40,7 +40,7 @@ public class Life {
 		aliveNeighbors.add(2);
 		aliveNeighbors.add(3);
 		
-		//set default values for aliveNeighbors
+		//set default values for deadNeighbors
 		deadNeighbors.add(2);
 	}
 	
@@ -63,7 +63,7 @@ public class Life {
 		aliveNeighbors.add(2);
 		aliveNeighbors.add(3);
 		
-		//set default values for aliveNeighbors
+		//set default values for deadNeighbors
 		deadNeighbors.add(2);
 	}
 	

@@ -102,17 +102,17 @@ public class LifeGUI {
 
 							@Override
 							public void actionPerformed(ActionEvent e) {
-								int x =  Integer.valueOf(e.getActionCommand()) / 10;
-								int y = Integer.valueOf(e.getActionCommand()) % 10;
-								if(life.checkCellState(x, y))
+								int x2 =  Integer.valueOf(e.getActionCommand()) / 10;
+								int y2 = Integer.valueOf(e.getActionCommand()) % 10;
+								if(life.checkCellState(x2, y2))
 								{
-									cell[x][y].setIcon(aliveCell);
-									life.aliveCell(x, y);
+									cell[x2][y2].setIcon(aliveCell);
+									life.aliveCell(x2, y2);
 								}
 								else
 								{
 									cell[x][y].setIcon(deadCell);
-									life.killCell(x, y);
+									life.killCell(x2, y2);
 								}
 							}	
 						});

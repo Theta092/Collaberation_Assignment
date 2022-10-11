@@ -13,17 +13,17 @@ import java.util.ArrayList;
 
 public class Life {
 	
-	int gridSizeX;
-	int gridSizeY;
+	int cellStateSizeX;
+	int cellStateSizeY;
 	boolean[][] cellState;
 	boolean[][] newCellState;
 	
 	public Life()
 	{
-		gridSizeX = 20;
-		gridSizeY = 20;
-		cellState = new boolean[gridSizeX][gridSizeY];
-		newCellState = new boolean[gridSizeX][gridSizeY];
+		cellStateSizeX = 20;
+		cellStateSizeY = 20;
+		cellState = new boolean[cellStateSizeX][cellStateSizeY];
+		newCellState = new boolean[cellStateSizeX][cellStateSizeY];
 		for(int i = 0; i < cellState.length; i++)
 		{
 			for(int j = 0; j < cellState[0].length; j++)
@@ -36,10 +36,10 @@ public class Life {
 	
 	public Life(int x, int y)
 	{
-		gridSizeX = x;
-		gridSizeY = y;
-		cellState = new boolean[gridSizeX][gridSizeY];
-		newCellState = new boolean[gridSizeX][gridSizeY];
+		cellStateSizeX = x;
+		cellStateSizeY = y;
+		cellState = new boolean[cellStateSizeX][cellStateSizeY];
+		newCellState = new boolean[cellStateSizeX][cellStateSizeY];
 		for(int i = 0; i < cellState.length; i++)
 		{
 			for(int j = 0; j < cellState[0].length; j++)
@@ -76,9 +76,7 @@ public class Life {
 		{
 			for(int j = 0; j < cellState[0].length; j++)
 			{
-				//
 				//if the cell is alive
-				//
 				if(cellState[i][j])
 				{
 					neighbours = 0;
@@ -86,25 +84,25 @@ public class Life {
 					{
 						for(int b = -1; b <= 1; b++)
 						{
-							if(a != 0 && b != 0)
+							if(a == 0 && b == 0)
 							{
-								if(i + a >= 0 && j + b >= 0 && i + a < gridSizeX && j + b < gridSizeY)
+								//void
+							}
+							else if(i + a >= 0 && j + b >= 0 && i + a < cellStateSizeX && j + b < cellStateSizeY)
+							{
+								if(cellState[i + a][j + b])
 								{
-									if(cellState[i + a][j + b])
-									{
-										neighbours ++;
-									}
+									neighbours ++;
 								}
 							}
 						}
 					}
-					//checks if there are X number of neighbours
-					System.out.println(i + " " + j + " has " + neighbours + " neighbours");
-					if(neighbours == 3)
+					//checks if there are two or three neighbours
+					if(neighbours == 2)
 					{
 						newCellState[i][j] = true;
 					}
-					else if(neighbours == 2)
+					else if(neighbours == 3)
 					{
 						newCellState[i][j] = true;
 					}
@@ -113,22 +111,19 @@ public class Life {
 						newCellState[i][j] = false;
 					}
 				}
-				//
 				//if the cell is not alive
-				//
 				else
 				{
 					neighbours = 0;
-					//check neighbours
 					for(int a = -1; a <= 1; a++)
 					{
 						for(int b = -1; b <= 1; b++)
 						{
 							if(a == 0 && b == 0)
 							{
-								
+								//void
 							}
-							else if(i + a >= 0 && j + b >= 0 && i + a < gridSizeX && j + b < gridSizeY)
+							else if(i + a >= 0 && j + b >= 0 && i + a < cellStateSizeX && j + b < cellStateSizeY)
 							{
 								if(cellState[i + a][j + b])
 								{
@@ -146,7 +141,14 @@ public class Life {
 						newCellState[i][j] = false;
 					}
 				}
-				//sets the grid to the new one
+			}
+		}
+		
+		//sets the cellState to the new one
+		for(int i = 0; i < cellState.length; i++)
+		{
+			for(int j = 0; j < cellState[0].length; j++)
+			{
 				cellState[i][j] = newCellState[i][j];
 			}
 		}

@@ -99,7 +99,6 @@ public class LifeGUI {
 
 							@Override
 							public void actionPerformed(ActionEvent e) {
-<<<<<<< HEAD
 								int x2 =  Integer.valueOf(e.getActionCommand()) / 10;
 								int y2 = Integer.valueOf(e.getActionCommand()) % 10;
 								if(life.checkCellState(x2, y2))
@@ -112,12 +111,10 @@ public class LifeGUI {
 									cell[x][y].setIcon(deadCell);
 									life.killCell(x2, y2);
 								}
-=======
 								int x =  Integer.valueOf(e.getActionCommand()) / 100;
 								int y = Integer.valueOf(e.getActionCommand()) % 100;
 								updateCellIcon(x, y, aliveCell, deadCell);
 								
->>>>>>> branch 'main' of https://github.com/Theta092/Collaberation_Assignment.git
 							}	
 						});
 						cell[i][j].setPreferredSize(new Dimension(32, 32));

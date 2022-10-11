@@ -29,7 +29,7 @@ public class Life {
 			for(int j = 0; j < cellState[0].length; j++)
 			{
 				cellState[i][j] = false;
-				newCellState[i][j] = cellState[i][j];
+				newCellState[i][j] = false;
 			}
 		}
 	}
@@ -99,6 +99,7 @@ public class Life {
 						}
 					}
 					//checks if there are X number of neighbours
+					System.out.println(i + " " + j + " has " + neighbours + " neighbours");
 					if(neighbours == 3)
 					{
 						newCellState[i][j] = true;
@@ -123,14 +124,15 @@ public class Life {
 					{
 						for(int b = -1; b <= 1; b++)
 						{
-							if(a != 0 && b != 0)
+							if(a == 0 && b == 0)
 							{
-								if(i + a >= 0 && j + b >= 0 && i + a < gridSizeX && j + b < gridSizeY)
+								
+							}
+							else if(i + a >= 0 && j + b >= 0 && i + a < gridSizeX && j + b < gridSizeY)
+							{
+								if(cellState[i + a][j + b])
 								{
-									if(cellState[i + a][j + b])
-									{
-										neighbours ++;
-									}
+									neighbours ++;
 								}
 							}
 						}

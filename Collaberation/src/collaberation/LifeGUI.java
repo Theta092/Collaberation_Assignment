@@ -103,6 +103,7 @@ public class LifeGUI {
 								int x =  Integer.valueOf(e.getActionCommand()) / 100;
 								int y = Integer.valueOf(e.getActionCommand()) % 100;
 								updateCellIcon(x, y, aliveCell, deadCell);
+								
 							}	
 						});
 						cell[i][j].setPreferredSize(new Dimension(32, 32));

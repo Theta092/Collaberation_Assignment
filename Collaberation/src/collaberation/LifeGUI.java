@@ -134,7 +134,15 @@ public class LifeGUI {
 						life.updateCellStates();
 						for(int i=0; i<cell.length; i++) {
 							for(int j=0; j<cell[0].length; j++) {
-								updateCellIcon(i, j, aliveCell, deadCell);
+								if(life.checkCellState(i, j))
+								{
+									cell[i][j].setIcon(aliveCell);
+									System.out.println(i + " " + j + " is alive");
+								}
+								else
+								{
+									cell[i][j].setIcon(deadCell);
+								}
 							}
 						}
 					}

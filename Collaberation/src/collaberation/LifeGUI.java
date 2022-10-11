@@ -22,11 +22,11 @@ import javax.swing.*;
 
 public class LifeGUI {
 	Scanner input = new Scanner(System.in);
-	Life life = new Life(0, 0);
+	Life life;
 	JFrame frame;
 	JPanel panel, begin, run;
 	JLabel label;
-	JButton start;
+	JButton start, step, play;
 	JButton[][] cell;
 	String[][] a = new String[0][0];
 	int x, y;
@@ -35,7 +35,7 @@ public class LifeGUI {
 
 	public LifeGUI() {
 		
-		ImageIcon deadCell, aliveCell, startIcon, startHighlightIcon;
+		ImageIcon deadCell, aliveCell, startIcon, startHighlightIcon, playIcon, stepIcon;
 		
 		frame = new JFrame("Life");
 		frame.setSize(1000,800);
@@ -46,11 +46,14 @@ public class LifeGUI {
 		aliveCell = new ImageIcon(getClass().getClassLoader().getResource("alive cell.png"));
 		startIcon = new ImageIcon(getClass().getClassLoader().getResource("start button.png"));
 		startHighlightIcon = new ImageIcon(getClass().getClassLoader().getResource("start button blue.png"));
+		stepIcon = new ImageIcon(getClass().getClassLoader().getResource("step button.png"));
+		playIcon = new ImageIcon(getClass().getClassLoader().getResource("play button.png"));
 		
 		panel = new JPanel(new GridBagLayout());
 		panel.setBackground(Color.darkGray);
 		
 		begin = new JPanel(new GridBagLayout());
+		run = new JPanel(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		
 		questx = new JTextField(10);
@@ -78,30 +81,25 @@ public class LifeGUI {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				num = questx.getText();
-				x = Integer.valueOf(num);
+				x = Integer.valueOf(questx.getText());
 				
-				num = questy.getText();
-				y = Integer.valueOf(num);
+				y = Integer.valueOf(questy.getText());
 				
 				cell = new JButton[x][y];
 				a = new String[x][y];
 				
-				for(int i=0; i<x; i++) {
-					for(int j=0; j<y; j++) {
-						a[i][j] = i+""+j;
-					}
-				}
+				life  = new Life(x, y);
 				
-				for(int i=0; i<cell[0].length; i++) {
+				for(int i=0; i<cell.length; i++) {
 					for(int j=0; j<cell[0].length; j++) {
 						System.out.println(i + " " + j);
 						cell[i][j] = new JButton(deadCell);
-						cell[i][j].setActionCommand(a[i][j]);
+						cell[i][j].setActionCommand(String.valueOf((i*100) + j));
 						cell[i][j].addActionListener(new ActionListener() {
 
 							@Override
 							public void actionPerformed(ActionEvent e) {
+<<<<<<< HEAD
 								int x2 =  Integer.valueOf(e.getActionCommand()) / 10;
 								int y2 = Integer.valueOf(e.getActionCommand()) % 10;
 								if(life.checkCellState(x2, y2))
@@ -114,6 +112,12 @@ public class LifeGUI {
 									cell[x][y].setIcon(deadCell);
 									life.killCell(x2, y2);
 								}
+=======
+								int x =  Integer.valueOf(e.getActionCommand()) / 100;
+								int y = Integer.valueOf(e.getActionCommand()) % 100;
+								updateCellIcon(x, y, aliveCell, deadCell);
+								
+>>>>>>> branch 'main' of https://github.com/Theta092/Collaberation_Assignment.git
 							}	
 						});
 						cell[i][j].setPreferredSize(new Dimension(32, 32));
@@ -122,11 +126,57 @@ public class LifeGUI {
 						cell[i][j].setFocusPainted(false); 
 						cell[i][j].setOpaque(false);
 						c.gridx = i;
-						c.gridy = j;
+						c.gridy = j + 1;
 						run.add(cell[i][j],c);
 					}
 				}
 
+				/*
+				 * Simulation user input
+				 */
+				//stepper button
+				step = new JButton(stepIcon);
+				step.setPreferredSize(new Dimension(32, 32));
+				step.setContentAreaFilled(false);
+				step.setBorderPainted(false);
+				step.setFocusPainted(false); 
+				step.setOpaque(false);
+				step.addActionListener(new ActionListener() {
+
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						life.updateCellStates();
+						for(int i=0; i<cell.length; i++) {
+							for(int j=0; j<cell[0].length; j++) {
+								if(life.checkCellState(i, j))
+								{
+									cell[i][j].setIcon(aliveCell);
+									System.out.println(i + " " + j + " is alive");
+								}
+								else
+								{
+									cell[i][j].setIcon(deadCell);
+								}
+							}
+						}
+					}
+					
+				});
+				c.gridx = 0;
+				c.gridy = 0;
+				run.add(step, c);
+				//play button
+				play = new JButton(playIcon);
+				play.setPreferredSize(new Dimension(32, 32));
+				play.setContentAreaFilled(false);
+				play.setBorderPainted(false);
+				play.setFocusPainted(false); 
+				play.setOpaque(false);
+				c.gridx = cell.length - 1;
+				c.gridy = 0;
+				run.add(play, c);
+				
 				run.setVisible(true);
 				begin.setVisible(false);
 			}
@@ -134,8 +184,6 @@ public class LifeGUI {
 		c.gridx = 1;
 		c.gridy = 7;
 		begin.add(start,c);
-		
-		run = new JPanel(new GridBagLayout());
 		
 		System.out.println("check");
 		
@@ -147,5 +195,21 @@ public class LifeGUI {
 		
 		frame.setContentPane(panel);
 		frame.setVisible(true);
+	}
+	
+	public void updateCellIcon(int x, int y, ImageIcon alive, ImageIcon dead)
+	{
+		if(life.checkCellState(x, y))
+		{
+			life.killCell(x, y);
+			System.out.println(life.checkCellState(x, y));
+			cell[x][y].setIcon(dead);
+		}
+		else
+		{
+			life.aliveCell(x, y);
+			System.out.println(life.checkCellState(x, y));
+			cell[x][y].setIcon(alive);
+		}
 	}
 }

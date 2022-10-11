@@ -28,6 +28,10 @@ public class LifeGUI {
 	JLabel label;
 	JButton start, step, play;
 	JButton[][] cell;
+	final int FPS_MIN = 0;
+	final int FPS_MAX = 30;
+	final int FPS_INIT = 15;
+	JSlider simSpeed = new JSlider(FPS_MIN, FPS_MAX, FPS_INIT);
 	String[][] a = new String[0][0];
 	int x, y;
 	String num;
@@ -152,6 +156,17 @@ public class LifeGUI {
 				c.gridx = 0;
 				c.gridy = 0;
 				run.add(step, c);
+				
+				simSpeed.setPreferredSize(new Dimension(128, 32));
+				simSpeed.setMajorTickSpacing(10);
+				simSpeed.setMinorTickSpacing(1);
+				simSpeed.setPaintTicks(true);
+				simSpeed.setPaintLabels(true);
+				simSpeed.setOrientation(SwingConstants.HORIZONTAL);
+				c.gridx = 1;
+				c.gridy = 0;
+				panel.add(simSpeed, c);
+				
 				//play button
 				play = new JButton(playIcon);
 				play.setPreferredSize(new Dimension(32, 32));
@@ -159,6 +174,51 @@ public class LifeGUI {
 				play.setBorderPainted(false);
 				play.setFocusPainted(false); 
 				play.setOpaque(false);
+				play.addActionListener(new ActionListener() {
+
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						boolean playState = false;
+						if(playState)
+						{
+							playState = false;
+						}
+						else
+						{
+							playState = true;
+						}
+						Timer timer = new Timer(5000 - (simSpeed.getValue() * 200), new ActionListener() {
+							
+							@Override
+							public void actionPerformed(ActionEvent arg0) {            
+								life.updateCellStates();
+								for(int i=0; i<cell.length; i++) {
+									for(int j=0; j<cell[0].length; j++) {
+										if(life.checkCellState(i, j))
+										{
+											cell[i][j].setIcon(aliveCell);
+										}
+										else
+										{
+											cell[i][j].setIcon(deadCell);
+										}
+									}
+								}
+							}
+						});
+						timer.setRepeats(true);
+						if(playState)
+						{
+							timer.start();
+						}
+						else
+						{
+							timer.stop();
+						}
+					}
+					
+				});
 				c.gridx = cell.length - 1;
 				c.gridy = 0;
 				run.add(play, c);
@@ -170,8 +230,6 @@ public class LifeGUI {
 		c.gridx = 1;
 		c.gridy = 7;
 		begin.add(start,c);
-		
-		System.out.println("check");
 		
 		begin.setVisible(true);
 		run.setVisible(false);

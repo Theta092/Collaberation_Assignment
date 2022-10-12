@@ -62,32 +62,35 @@ public class LifeGUI {
 		panel.setBackground(Color.darkGray);
 		
 		begin = new JPanel(new GridBagLayout());
+		begin.setBackground(Color.darkGray);
 		run = new JPanel(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		
 		
 		//getting the x dimension for the grid
 		label = new JLabel("enter the x dimension");
+		label.setForeground(Color.white);
 		c.gridx = 1;
 		c.gridy = 1;
 		begin.add(label,c);
 		
 		questx = new JTextField(10);
 		questx.setPreferredSize(new Dimension(96, 32));
-		questx.setOpaque(false);
+		questx.setOpaque(true);
 		c.gridx = 1;
 		c.gridy = 2;
 		begin.add(questx,c);
 		
 		//getting the y dimension for the grid
 		label = new JLabel("enter the y dimension");
+		label.setForeground(Color.white);
 		c.gridx = 1;
 		c.gridy = 3;
 		begin.add(label,c);
 		
 		questy = new JTextField(10);
 		questy.setPreferredSize(new Dimension(96, 32));
-		questy.setOpaque(false);
+		questy.setOpaque(true);
 		c.gridx = 1;
 		c.gridy = 5;
 		begin.add(questy,c);

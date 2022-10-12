@@ -36,7 +36,6 @@ public class LifeGUI {
 	int x, y;
 	String num;
 	JTextField questx, questy;
-	boolean playState = false;
 
 	public LifeGUI() {
 		
@@ -175,6 +174,7 @@ public class LifeGUI {
 				play.setBorderPainted(false);
 				play.setFocusPainted(false); 
 				play.setOpaque(false);
+				boolean playState = false;
 				play.addActionListener(new ActionListener() {
 
 					@Override
@@ -191,38 +191,41 @@ public class LifeGUI {
 							isPlaying = true;
 							System.out.println("on");
 						}
-						playState = isPlaying;
-					}
-					
-				});
-				Timer timer = new Timer(5000 - (simSpeed.getValue() * 200), new ActionListener() {
-					
-					@Override
-					public void actionPerformed(ActionEvent arg0) {            
-						life.updateCellStates();
-						for(int i=0; i<cell.length; i++) {
-							for(int j=0; j<cell[0].length; j++) {
-								if(life.checkCellState(i, j))
-								{
-									cell[i][j].setIcon(aliveCell);
-								}
-								else
-								{
-									cell[i][j].setIcon(deadCell);
+						Timer timer = new Timer(5000 - (simSpeed.getValue() * 200), new ActionListener() {
+							
+							@Override
+							public void actionPerformed(ActionEvent arg0) {            
+								life.updateCellStates();
+								for(int i=0; i<cell.length; i++) {
+									for(int j=0; j<cell[0].length; j++) {
+										if(life.checkCellState(i, j))
+										{
+											cell[i][j].setIcon(aliveCell);
+										}
+										else
+										{
+											cell[i][j].setIcon(deadCell);
+										}
+									}
 								}
 							}
+						});
+						timer.setRepeats(true);
+						if(timer.isRunning())
+						{
+							if(!isPlaying)
+							{
+								timer.restart();
+								timer.stop();
+							}
+						}
+						else if(isPlaying)
+						{
+							timer.start();
 						}
 					}
+					
 				});
-				timer.setRepeats(true);
-				if(!playState)
-				{
-					timer.stop();
-				}
-				else if(playState)
-				{
-					timer.start();
-				}
 				c.gridx = cell.length - 1;
 				c.gridy = 0;
 				run.add(play, c);

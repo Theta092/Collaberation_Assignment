@@ -221,7 +221,7 @@ public class LifeGUI {
 				c.gridy = 0;
 				run.add(simSpeed, c);
 				
-				
+			
 				//play button
 				play = new JButton(playIcon);
 				play.setPreferredSize(new Dimension(32, 32));

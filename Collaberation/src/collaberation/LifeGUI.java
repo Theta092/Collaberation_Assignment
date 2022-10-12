@@ -19,6 +19,8 @@ import java.awt.event.ActionListener;
 import java.util.Scanner;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 public class LifeGUI {
 	Scanner input = new Scanner(System.in);
@@ -31,12 +33,14 @@ public class LifeGUI {
 	final int FPS_MIN = 0;
 	final int FPS_MAX = 30;
 	final int FPS_INIT = 15;
-	JSlider simSpeed = new JSlider(FPS_MIN, FPS_MAX, FPS_INIT);
 	String[][] a = new String[0][0];
 	int x, y;
 	String num;
 	JTextField questx, questy;
+	//timer vars
 	boolean playState = false;
+	int tickSpeed;
+	JSlider simSpeed = new JSlider(FPS_MIN, FPS_MAX, FPS_INIT);
 
 	public LifeGUI() {
 		
@@ -157,24 +161,13 @@ public class LifeGUI {
 				c.gridx = 0;
 				c.gridy = 0;
 				run.add(step, c);
-				
-				//timer slider
-				simSpeed.setPreferredSize(new Dimension(128, 32));
-				simSpeed.setMajorTickSpacing(10);
-				simSpeed.setMinorTickSpacing(1);
-				simSpeed.setPaintTicks(true);
-				simSpeed.setPaintLabels(true);
-				simSpeed.setOrientation(SwingConstants.HORIZONTAL);
-				c.gridx = 1;
-				c.gridy = 0;
-				panel.add(simSpeed, c);
-				
 				//timer setup
-				Timer timer = new Timer(5000 - (simSpeed.getValue() * 200), new ActionListener() {
+				Timer timer = new Timer(5000 - (tickSpeed * 200), new ActionListener() {
 					
 					@Override
 					public void actionPerformed(ActionEvent arg0) {            
 						life.updateCellStates();
+						
 						for(int i=0; i<cell.length; i++) {
 							for(int j=0; j<cell[0].length; j++) {
 								if(life.checkCellState(i, j))
@@ -189,6 +182,28 @@ public class LifeGUI {
 						}
 					}
 				});
+				
+				//timer slider
+				simSpeed.setPreferredSize(new Dimension(128, 32));
+				simSpeed.setMajorTickSpacing(10);
+				simSpeed.setMinorTickSpacing(1);
+				simSpeed.setPaintTicks(true);
+				simSpeed.setPaintLabels(true);
+				simSpeed.addChangeListener(new ChangeListener() {
+
+					@Override
+					public void stateChanged(ChangeEvent e) {
+						// TODO Auto-generated method stub
+						tickSpeed = simSpeed.getValue();
+						timer.setDelay(5000 - (tickSpeed * 160));
+					}
+					
+				});
+				simSpeed.setOrientation(SwingConstants.HORIZONTAL);
+				c.gridx = 1;
+				c.gridy = 0;
+				panel.add(simSpeed, c);
+				
 				
 				//play button
 				play = new JButton(playIcon);

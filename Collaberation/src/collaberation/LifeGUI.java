@@ -174,19 +174,22 @@ public class LifeGUI {
 				play.setBorderPainted(false);
 				play.setFocusPainted(false); 
 				play.setOpaque(false);
+				boolean playState = false;
 				play.addActionListener(new ActionListener() {
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						// TODO Auto-generated method stub
-						boolean playState = false;
-						if(playState)
+						boolean isPlaying = playState;
+						if(isPlaying)
 						{
-							playState = false;
+							isPlaying = false;
+							System.out.println("off");
 						}
 						else
 						{
-							playState = true;
+							isPlaying = true;
+							System.out.println("on");
 						}
 						Timer timer = new Timer(5000 - (simSpeed.getValue() * 200), new ActionListener() {
 							
@@ -208,13 +211,17 @@ public class LifeGUI {
 							}
 						});
 						timer.setRepeats(true);
-						if(playState)
+						if(timer.isRunning())
+						{
+							if(!isPlaying)
+							{
+								timer.restart();
+								timer.stop();
+							}
+						}
+						else if(isPlaying)
 						{
 							timer.start();
-						}
-						else
-						{
-							timer.stop();
 						}
 					}
 					

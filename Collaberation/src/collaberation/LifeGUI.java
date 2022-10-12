@@ -44,7 +44,7 @@ public class LifeGUI {
 
 	public LifeGUI() {
 		
-		ImageIcon deadCell, aliveCell, startIcon, startHighlightIcon, playIcon, stepIcon;
+		ImageIcon deadCell, aliveCell, startIcon, startHighlightIcon, playIcon, stepIcon, pauseIcon;
 		
 		frame = new JFrame("Life");
 		frame.setSize(1000,800);
@@ -57,6 +57,7 @@ public class LifeGUI {
 		startHighlightIcon = new ImageIcon(getClass().getClassLoader().getResource("start button blue.png"));
 		stepIcon = new ImageIcon(getClass().getClassLoader().getResource("step button.png"));
 		playIcon = new ImageIcon(getClass().getClassLoader().getResource("play button.png"));
+		pauseIcon = new ImageIcon(getClass().getClassLoader().getResource("pause button.png"));
 		
 		panel = new JPanel(new GridBagLayout());
 		panel.setBackground(Color.darkGray);
@@ -237,12 +238,12 @@ public class LifeGUI {
 						if(isPlaying)
 						{
 							isPlaying = false;
-							System.out.println("off");
+							play.setIcon(playIcon);
 						}
 						else
 						{
 							isPlaying = true;
-							System.out.println("on");
+							play.setIcon(pauseIcon);
 						}
 
 						playState = isPlaying;
@@ -254,6 +255,21 @@ public class LifeGUI {
 						}
 						else if(playState)
 						{
+							life.updateCellStates();
+							
+							for(int i=0; i<cell.length; i++) {
+								for(int j=0; j<cell[0].length; j++) {
+									if(life.checkCellState(i, j))
+									{
+										cell[i][j].setIcon(aliveCell);
+									}
+									else
+									{
+										cell[i][j].setIcon(deadCell);
+									}
+								}
+							}
+							timer.setDelay(5000 - (tickSpeed * 160));
 							timer.start();
 						}
 					}

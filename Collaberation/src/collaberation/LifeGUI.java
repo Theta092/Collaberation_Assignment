@@ -62,6 +62,7 @@ public class LifeGUI {
 		panel.setBackground(Color.darkGray);
 		
 		begin = new JPanel(new GridBagLayout());
+		begin.setBackground(Color.darkGray);
 		run = new JPanel(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		

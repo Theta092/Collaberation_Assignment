@@ -42,10 +42,9 @@ public class LifeGUI {
 	boolean playState = false;
 	int tickSpeed;
 	JSlider simSpeed = new JSlider(FPS_MIN, FPS_MAX, FPS_INIT);
-	ImageIcon deadCell, aliveCell, startIcon, startHighlightIcon, playIcon, stepIcon, pauseIcon, resetIcon;
+	ImageIcon deadCell, aliveCell, startIcon, startHighlightIcon, playIcon, stepIcon, pauseIcon, resetIcon, scrollBar;
 
 	public LifeGUI() {
-		
 		
 		frame = new JFrame("Life");
 		frame.setSize(1000,800);
@@ -60,12 +59,14 @@ public class LifeGUI {
 		playIcon = new ImageIcon(getClass().getClassLoader().getResource("play button.png"));
 		pauseIcon = new ImageIcon(getClass().getClassLoader().getResource("pause button.png"));
 		resetIcon = new ImageIcon(getClass().getClassLoader().getResource("reset button.png"));
+		scrollBar = new ImageIcon(getClass().getClassLoader().getResource("scroll bar bg.png"));
 		
 		panel = new JPanel(new GridBagLayout());
 		panel.setBackground(Color.darkGray);
 		
 		begin = new JPanel(new GridBagLayout());
-		begin.setBackground(Color.darkGray);
+		begin.setBackground(Color.gray);
+		begin.setSize(new Dimension(100, 100));
 		run = new JPanel(new GridBagLayout());
 		run.setBackground(Color.darkGray);
 		GridBagConstraints c = new GridBagConstraints();
@@ -215,6 +216,7 @@ public class LifeGUI {
 				});
 				
 				//timer slider
+				
 				simSpeed.setPreferredSize(new Dimension(128, 32));
 				simSpeed.setMajorTickSpacing(10);
 				simSpeed.setMinorTickSpacing(1);
@@ -275,6 +277,21 @@ public class LifeGUI {
 						}
 						else
 						{
+							life.updateCellStates();
+							
+							for(int i=0; i<cell.length; i++) {
+								for(int j=0; j<cell[0].length; j++) {
+									if(life.checkCellState(i, j))
+									{
+										cell[i][j].setIcon(aliveCell);
+									}
+									else
+									{
+										cell[i][j].setIcon(deadCell);
+									}
+								}
+							}
+							timer.setDelay(5000 - (tickSpeed * 160));
 							timer.start();
 							timerSpeed = 5000 - (tickSpeed * 160);
 							timer.setDelay(timerSpeed);

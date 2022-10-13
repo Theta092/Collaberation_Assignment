@@ -241,9 +241,10 @@ public class LifeGUI {
 					
 				});
 				simSpeed.setOrientation(SwingConstants.HORIZONTAL);
-				c.gridx = 1;
+				c.gridx = 2;
+				c.gridwidth = 4;
 				c.gridy = 0;
-				panel.add(simSpeed, c);
+				run.add(simSpeed, c);
 				
 				
 				//play button

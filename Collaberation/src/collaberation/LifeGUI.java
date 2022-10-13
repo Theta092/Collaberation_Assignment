@@ -115,6 +115,9 @@ public class LifeGUI {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				x = Integer.valueOf(questx.getText());
+				if(x < 7) {
+					x = 7;
+				}
 				
 				y = Integer.valueOf(questy.getText());
 				

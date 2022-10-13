@@ -28,7 +28,7 @@ public class LifeGUI {
 	JFrame frame;
 	JPanel panel, begin, run;
 	JLabel label;
-	JButton start, step, play;
+	JButton start, step, play, reset;
 	JButton[][] cell;
 	String[][] a = new String[0][0];
 	int x, y;
@@ -42,7 +42,7 @@ public class LifeGUI {
 	boolean playState = false;
 	int tickSpeed;
 	JSlider simSpeed = new JSlider(FPS_MIN, FPS_MAX, FPS_INIT);
-	ImageIcon deadCell, aliveCell, startIcon, startHighlightIcon, playIcon, stepIcon, pauseIcon;
+	ImageIcon deadCell, aliveCell, startIcon, startHighlightIcon, playIcon, stepIcon, pauseIcon, resetIcon;
 
 	public LifeGUI() {
 		
@@ -59,6 +59,7 @@ public class LifeGUI {
 		stepIcon = new ImageIcon(getClass().getClassLoader().getResource("step button.png"));
 		playIcon = new ImageIcon(getClass().getClassLoader().getResource("play button.png"));
 		pauseIcon = new ImageIcon(getClass().getClassLoader().getResource("pause button.png"));
+		resetIcon = new ImageIcon(getClass().getClassLoader().getResource("reset button.png"));
 		
 		panel = new JPanel(new GridBagLayout());
 		panel.setBackground(Color.darkGray);
@@ -66,6 +67,7 @@ public class LifeGUI {
 		begin = new JPanel(new GridBagLayout());
 		begin.setBackground(Color.darkGray);
 		run = new JPanel(new GridBagLayout());
+		run.setBackground(Color.darkGray);
 		GridBagConstraints c = new GridBagConstraints();
 		
 		
@@ -165,6 +167,41 @@ public class LifeGUI {
 				c.gridx = 0;
 				c.gridy = 0;
 				run.add(step, c);
+				
+				//Reset button
+				reset = new JButton(resetIcon);
+				reset.setPreferredSize(new Dimension(32, 32));
+				reset.setContentAreaFilled(false);
+				reset.setBorderPainted(false);
+				reset.setFocusPainted(false); 
+				reset.setOpaque(false);
+				reset.addActionListener(new ActionListener() {
+
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						life.resetCells();
+						for(int i = 0; i < x; i++)
+						{
+							for(int j = 0; j < y; j++)
+							{
+								if(life.checkCellState(i, j))
+								{
+									cell[i][j].setIcon(aliveCell);
+								}
+								else
+								{
+									cell[i][j].setIcon(deadCell);
+								}
+							}
+						}
+					}
+					
+				});
+				c.gridx = 1;
+				c.gridy = 0;
+				run.add(reset, c);
+				
 				//timer setup
 				tickSpeed = simSpeed.getValue();
 				Timer timer = new Timer(0, new ActionListener() {

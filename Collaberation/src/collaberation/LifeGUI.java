@@ -61,7 +61,7 @@ public class LifeGUI {
 		resetIcon = new ImageIcon(getClass().getClassLoader().getResource("reset button.png"));
 		scrollBar = new ImageIcon(getClass().getClassLoader().getResource("scroll bar bg.png"));
 		
-		//the panel that acts as a container
+		
 		panel = new JPanel(new GridBagLayout());
 		panel.setBackground(Color.darkGray);
 		
@@ -167,7 +167,6 @@ public class LifeGUI {
 					
 				});
 				c.gridx = 0;
-				c.gridwidth = 1;
 				c.gridy = 0;
 				run.add(step, c);
 				
@@ -202,7 +201,6 @@ public class LifeGUI {
 					
 				});
 				c.gridx = 1;
-				c.gridwidth = 1;
 				c.gridy = 0;
 				run.add(reset, c);
 				
@@ -217,7 +215,6 @@ public class LifeGUI {
 				});
 				
 				//timer slider
-				
 				simSpeed.setPreferredSize(new Dimension(128, 32));
 				simSpeed.setMajorTickSpacing(10);
 				simSpeed.setMinorTickSpacing(1);
@@ -242,10 +239,9 @@ public class LifeGUI {
 					
 				});
 				simSpeed.setOrientation(SwingConstants.HORIZONTAL);
-				c.gridx = 2;
-				c.gridwidth = 4;
+				c.gridx = 1;
 				c.gridy = 0;
-				run.add(simSpeed, c);
+				panel.add(simSpeed, c);
 				
 				
 				//play button
@@ -301,7 +297,6 @@ public class LifeGUI {
 					
 				});
 				c.gridx = cell.length - 1;
-				c.gridwidth = 1;
 				c.gridy = 0;
 				run.add(play, c);
 				

@@ -61,7 +61,7 @@ public class LifeGUI {
 		resetIcon = new ImageIcon(getClass().getClassLoader().getResource("reset button.png"));
 		scrollBar = new ImageIcon(getClass().getClassLoader().getResource("scroll bar bg.png"));
 		
-		
+		//the panel that acts as a container
 		panel = new JPanel(new GridBagLayout());
 		panel.setBackground(Color.darkGray);
 		

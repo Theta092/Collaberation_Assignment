@@ -165,6 +165,7 @@ public class LifeGUI {
 					
 				});
 				c.gridx = 0;
+				c.gridwidth = 1;
 				c.gridy = 0;
 				run.add(step, c);
 				
@@ -199,6 +200,7 @@ public class LifeGUI {
 					
 				});
 				c.gridx = 1;
+				c.gridwidth = 1;
 				c.gridy = 0;
 				run.add(reset, c);
 				
@@ -237,9 +239,10 @@ public class LifeGUI {
 					
 				});
 				simSpeed.setOrientation(SwingConstants.HORIZONTAL);
-				c.gridx = 1;
+				c.gridx = 2;
+				c.gridwidth = 4;
 				c.gridy = 0;
-				panel.add(simSpeed, c);
+				run.add(simSpeed, c);
 				
 				
 				//play button
@@ -280,6 +283,7 @@ public class LifeGUI {
 					
 				});
 				c.gridx = cell.length - 1;
+				c.gridwidth = 1;
 				c.gridy = 0;
 				run.add(play, c);
 				

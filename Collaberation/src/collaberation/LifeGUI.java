@@ -39,8 +39,8 @@ public class LifeGUI {
 	//timer vars
 	int timerSpeed = 2600;
 	final int FPS_MIN = 0;
-	final int FPS_MAX = 30;
-	final int FPS_INIT = 15;
+	final int FPS_MAX = 10;
+	final int FPS_INIT = 5;
 	boolean playState = false;
 	int tickSpeed;
 	JSlider simSpeed = new JSlider(FPS_MIN, FPS_MAX, FPS_INIT);
@@ -69,9 +69,10 @@ public class LifeGUI {
 		
 		begin = new JPanel(new GridBagLayout());
 		begin.setBackground(Color.gray);
+		begin.setPreferredSize( new Dimension( 180, 200 ));
 		begin.setSize(new Dimension(100, 100));
 		run = new JPanel(new GridBagLayout());
-		run.setBackground(Color.darkGray);
+		run.setBackground(Color.gray);
 		GridBagConstraints c = new GridBagConstraints();
 		
 		
@@ -117,6 +118,8 @@ public class LifeGUI {
 				x = Integer.valueOf(questx.getText());
 				
 				y = Integer.valueOf(questy.getText());
+				
+				run.setPreferredSize( new Dimension((x * 32) + 32,(y * 32) + 64));
 				
 				cell = new JButton[x][y];
 				a = new String[x][y];
@@ -234,7 +237,7 @@ public class LifeGUI {
 						}
 						else
 						{
-							timerSpeed = 5000 - (tickSpeed * 160);
+							timerSpeed = 1000 - (tickSpeed * 99);
 							timer.setDelay(timerSpeed);
 						}
 					}
@@ -291,9 +294,9 @@ public class LifeGUI {
 									}
 								}
 							}
-							timer.setDelay(5000 - (tickSpeed * 160));
+							timer.setDelay(1000 - (tickSpeed * 99));
 							timer.start();
-							timerSpeed = 5000 - (tickSpeed * 160);
+							timerSpeed = 1000 - (tickSpeed * 99);
 							timer.setDelay(timerSpeed);
 						}
 					}

@@ -9,7 +9,6 @@
 */
 
 package collaberation;
-import java.util.ArrayList;
 
 public class Life {
 	
@@ -150,6 +149,18 @@ public class Life {
 			for(int j = 0; j < cellState[0].length; j++)
 			{
 				cellState[i][j] = newCellState[i][j];
+			}
+		}
+	}
+	
+	//makes all cells false
+	public void resetCells()
+	{
+		for(int i = 0; i < cellState.length; i++)
+		{
+			for(int j = 0; j < cellState[0].length; j++)
+			{
+				cellState[i][j] = false;
 			}
 		}
 	}

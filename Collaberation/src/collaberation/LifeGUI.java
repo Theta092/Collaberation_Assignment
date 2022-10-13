@@ -28,23 +28,23 @@ public class LifeGUI {
 	JFrame frame;
 	JPanel panel, begin, run;
 	JLabel label;
-	JButton start, step, play;
+	JButton start, step, play, reset;
 	JButton[][] cell;
-	final int FPS_MIN = 0;
-	final int FPS_MAX = 30;
-	final int FPS_INIT = 15;
 	String[][] a = new String[0][0];
 	int x, y;
 	String num;
 	JTextField questx, questy;
 	//timer vars
+	int timerSpeed = 2600;
+	final int FPS_MIN = 0;
+	final int FPS_MAX = 30;
+	final int FPS_INIT = 15;
 	boolean playState = false;
 	int tickSpeed;
 	JSlider simSpeed = new JSlider(FPS_MIN, FPS_MAX, FPS_INIT);
+	ImageIcon deadCell, aliveCell, startIcon, startHighlightIcon, playIcon, stepIcon, pauseIcon, resetIcon, scrollBar;
 
 	public LifeGUI() {
-		
-		ImageIcon deadCell, aliveCell, startIcon, startHighlightIcon, playIcon, stepIcon, pauseIcon;
 		
 		frame = new JFrame("Life");
 		frame.setSize(1000,800);
@@ -58,13 +58,17 @@ public class LifeGUI {
 		stepIcon = new ImageIcon(getClass().getClassLoader().getResource("step button.png"));
 		playIcon = new ImageIcon(getClass().getClassLoader().getResource("play button.png"));
 		pauseIcon = new ImageIcon(getClass().getClassLoader().getResource("pause button.png"));
+		resetIcon = new ImageIcon(getClass().getClassLoader().getResource("reset button.png"));
+		scrollBar = new ImageIcon(getClass().getClassLoader().getResource("scroll bar bg.png"));
 		
 		panel = new JPanel(new GridBagLayout());
 		panel.setBackground(Color.darkGray);
 		
 		begin = new JPanel(new GridBagLayout());
-		begin.setBackground(Color.darkGray);
+		begin.setBackground(Color.gray);
+		begin.setSize(new Dimension(100, 100));
 		run = new JPanel(new GridBagLayout());
+		run.setBackground(Color.darkGray);
 		GridBagConstraints c = new GridBagConstraints();
 		
 		
@@ -118,7 +122,6 @@ public class LifeGUI {
 				
 				for(int i=0; i<cell.length; i++) {
 					for(int j=0; j<cell[0].length; j++) {
-						System.out.println(i + " " + j);
 						cell[i][j] = new JButton(deadCell);
 						cell[i][j].setActionCommand(String.valueOf((i*100) + j));
 						cell[i][j].addActionListener(new ActionListener() {
@@ -128,7 +131,7 @@ public class LifeGUI {
 
 								int x =  Integer.valueOf(e.getActionCommand()) / 100;
 								int y = Integer.valueOf(e.getActionCommand()) % 100;
-								updateCellIcon(x, y, aliveCell, deadCell);
+								updateCellIcon(x, y);
 								
 							}	
 						});
@@ -158,35 +161,31 @@ public class LifeGUI {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						// TODO Auto-generated method stub
-						life.updateCellStates();
-						for(int i=0; i<cell.length; i++) {
-							for(int j=0; j<cell[0].length; j++) {
-								if(life.checkCellState(i, j))
-								{
-									cell[i][j].setIcon(aliveCell);
-									System.out.println(i + " " + j + " is alive");
-								}
-								else
-								{
-									cell[i][j].setIcon(deadCell);
-								}
-							}
-						}
+						changeCells();
 					}
 					
 				});
 				c.gridx = 0;
 				c.gridy = 0;
 				run.add(step, c);
-				//timer setup
-				Timer timer = new Timer(5000 - (tickSpeed * 200), new ActionListener() {
-					
+				
+				//Reset button
+				reset = new JButton(resetIcon);
+				reset.setPreferredSize(new Dimension(32, 32));
+				reset.setContentAreaFilled(false);
+				reset.setBorderPainted(false);
+				reset.setFocusPainted(false); 
+				reset.setOpaque(false);
+				reset.addActionListener(new ActionListener() {
+
 					@Override
-					public void actionPerformed(ActionEvent arg0) {            
-						life.updateCellStates();
-						
-						for(int i=0; i<cell.length; i++) {
-							for(int j=0; j<cell[0].length; j++) {
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						life.resetCells();
+						for(int i = 0; i < x; i++)
+						{
+							for(int j = 0; j < y; j++)
+							{
 								if(life.checkCellState(i, j))
 								{
 									cell[i][j].setIcon(aliveCell);
@@ -198,9 +197,24 @@ public class LifeGUI {
 							}
 						}
 					}
+					
+				});
+				c.gridx = 1;
+				c.gridy = 0;
+				run.add(reset, c);
+				
+				//timer setup
+				tickSpeed = simSpeed.getValue();
+				Timer timer = new Timer(0, new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent arg0) {            
+						changeCells();
+					}
 				});
 				
 				//timer slider
+				
 				simSpeed.setPreferredSize(new Dimension(128, 32));
 				simSpeed.setMajorTickSpacing(10);
 				simSpeed.setMinorTickSpacing(1);
@@ -212,7 +226,15 @@ public class LifeGUI {
 					public void stateChanged(ChangeEvent e) {
 						// TODO Auto-generated method stub
 						tickSpeed = simSpeed.getValue();
-						timer.setDelay(5000 - (tickSpeed * 160));
+						if(simSpeed.getValue() == 0)
+						{
+							timer.stop();
+						}
+						else
+						{
+							timerSpeed = 5000 - (tickSpeed * 160);
+							timer.setDelay(timerSpeed);
+						}
 					}
 					
 				});
@@ -234,26 +256,23 @@ public class LifeGUI {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						// TODO Auto-generated method stub
-						boolean isPlaying = playState;
-						if(isPlaying)
+						timer.setRepeats(true);
+						if(playState)
 						{
-							isPlaying = false;
+							playState = false;
 							play.setIcon(playIcon);
 						}
 						else
 						{
-							isPlaying = true;
+							playState = true;
 							play.setIcon(pauseIcon);
 						}
-
-						playState = isPlaying;
-						timer.restart();
-						timer.setRepeats(true);
+						
 						if(!playState)
 						{
 							timer.stop();
 						}
-						else if(playState)
+						else
 						{
 							life.updateCellStates();
 							
@@ -271,6 +290,8 @@ public class LifeGUI {
 							}
 							timer.setDelay(5000 - (tickSpeed * 160));
 							timer.start();
+							timerSpeed = 5000 - (tickSpeed * 160);
+							timer.setDelay(timerSpeed);
 						}
 					}
 					
@@ -297,19 +318,34 @@ public class LifeGUI {
 		frame.setVisible(true);
 	}
 	
-	public void updateCellIcon(int x, int y, ImageIcon alive, ImageIcon dead)
+	public void updateCellIcon(int x, int y)
 	{
 		if(life.checkCellState(x, y))
 		{
 			life.killCell(x, y);
-			System.out.println(life.checkCellState(x, y));
-			cell[x][y].setIcon(dead);
+			cell[x][y].setIcon(deadCell);
 		}
 		else
 		{
 			life.aliveCell(x, y);
-			System.out.println(life.checkCellState(x, y));
-			cell[x][y].setIcon(alive);
+			cell[x][y].setIcon(aliveCell);
+		}
+	}
+	
+	public void changeCells()
+	{
+		life.updateCellStates();
+		for(int i=0; i<cell.length; i++) {
+			for(int j=0; j<cell[0].length; j++) {
+				if(life.checkCellState(i, j))
+				{
+					cell[i][j].setIcon(aliveCell);
+				}
+				else
+				{
+					cell[i][j].setIcon(deadCell);
+				}
+			}
 		}
 	}
 }

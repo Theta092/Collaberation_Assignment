@@ -49,7 +49,7 @@ public class LifeGUI {
 	public LifeGUI() {
 		
 		frame = new JFrame("Life");
-		frame.setSize(1000,800);
+		frame.setSize(240, 280);
 		frame.setLocationRelativeTo(null);
 		
 		//Set Icons
@@ -122,6 +122,7 @@ public class LifeGUI {
 				
 				y = Integer.valueOf(questy.getText());
 				
+				frame.setSize((x * 32) + 96, (y * 32) + 128);
 				run.setPreferredSize( new Dimension((x * 32) + 32,(y * 32) + 64));
 				
 				cell = new JButton[x][y];
@@ -186,7 +187,7 @@ public class LifeGUI {
 				reset.setFocusPainted(false); 
 				reset.setOpaque(false);
 				reset.addActionListener(new ActionListener() {
-
+					
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						// TODO Auto-generated method stub
@@ -205,8 +206,9 @@ public class LifeGUI {
 								}
 							}
 						}
+						playState = false;
+						play.setIcon(playIcon);
 					}
-					
 				});
 				c.gridx = 1;
 				c.gridy = 0;
@@ -218,7 +220,10 @@ public class LifeGUI {
 					
 					@Override
 					public void actionPerformed(ActionEvent arg0) {            
-						changeCells();
+						if(playState)
+						{
+							changeCells();
+						}
 					}
 				});
 				
@@ -240,7 +245,7 @@ public class LifeGUI {
 						}
 						else
 						{
-							timerSpeed = 1000 - (tickSpeed * 99);
+							timerSpeed = 1000 - (tickSpeed * 90);
 							timer.setDelay(timerSpeed);
 						}
 					}
@@ -297,9 +302,9 @@ public class LifeGUI {
 									}
 								}
 							}
-							timer.setDelay(1000 - (tickSpeed * 99));
+							timer.setDelay(1000 - (tickSpeed * 90));
 							timer.start();
-							timerSpeed = 1000 - (tickSpeed * 99);
+							timerSpeed = 1000 - (tickSpeed * 90);
 							timer.setDelay(timerSpeed);
 						}
 					}
@@ -316,6 +321,7 @@ public class LifeGUI {
 		c.gridx = 1;
 		c.gridy = 7;
 		begin.add(start,c);
+
 		
 		begin.setVisible(true);
 		run.setVisible(false);

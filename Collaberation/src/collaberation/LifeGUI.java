@@ -1,5 +1,3 @@
-
-
 /*
 *     __       __   _______  _______ 
 *    |  |     |  | |   ____||   ____|
@@ -8,11 +6,12 @@
 *    |  `----.|  | |  |     |  |____ 
 *    |_______||__| |__|     |_______|
 *                                    
+* Nicholas Rempel
+* Zachary Nickel
+* Oct 14, 2022
+* a version of Conway's game of life.
 */
 
-/*
- * Zachary Nickel
- */
 package collaberation;
 
 import java.awt.Color;
@@ -368,5 +367,8 @@ public class LifeGUI {
 				}
 			}
 		}
+	}
+	public static void main(String[] args) {
+		new LifeGUI();
 	}
 }

@@ -6,11 +6,11 @@
 *    |  `----.|  | |  |     |  |____ 
 *    |_______||__| |__|     |_______|
 *                                                                       
+* Nicholas Rempel
+* Zachary Nickel
+* Oct 14, 2022
+* a version of Conway's game of life.
 */
-
-/*
- * Zachary Nickel
- */
 
 package collaberation;
 

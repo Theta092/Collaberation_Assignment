@@ -1,4 +1,4 @@
-//truck
+
 
 /*
 *     __       __   _______  _______ 
@@ -9,6 +9,10 @@
 *    |_______||__| |__|     |_______|
 *                                    
 */
+
+/*
+ * Zachary Nickel
+ */
 package collaberation;
 
 import java.awt.Color;

@@ -1,3 +1,7 @@
+/*
+ * Zachary Nickel
+ */
+
 package collaberation;
 
 public class RunLife {

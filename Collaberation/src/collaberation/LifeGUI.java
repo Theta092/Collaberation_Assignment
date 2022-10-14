@@ -1,5 +1,3 @@
-//truck
-
 /*
 *     __       __   _______  _______ 
 *    |  |     |  | |   ____||   ____|
@@ -8,6 +6,9 @@
 *    |  `----.|  | |  |     |  |____ 
 *    |_______||__| |__|     |_______|
 *                                    
+* Nicholas Rempel
+* Oct 14, 2022
+* a version of Conway's game of life.
 */
 package collaberation;
 
@@ -364,5 +365,8 @@ public class LifeGUI {
 				}
 			}
 		}
+	}
+	public static void main(String[] args) {
+		new LifeGUI();
 	}
 }

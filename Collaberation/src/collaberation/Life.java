@@ -6,6 +6,9 @@
 *    |  `----.|  | |  |     |  |____ 
 *    |_______||__| |__|     |_______|
 *                                                                       
+* Nicholas Rempel
+* Oct 14, 2022
+* a version of Conway's game of life.
 */
 
 package collaberation;

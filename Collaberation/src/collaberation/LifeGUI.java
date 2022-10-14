@@ -237,7 +237,6 @@ public class LifeGUI {
 				simSpeed.setForeground(Color.white);
 				simSpeed.setMajorTickSpacing(5);
 				simSpeed.setMinorTickSpacing(1);
-				//simSpeed.setPaintTicks(true);
 				simSpeed.setPaintLabels(true);
 				simSpeed.addChangeListener(new ChangeListener() {
 

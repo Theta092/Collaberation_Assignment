@@ -229,7 +229,8 @@ public class LifeGUI {
 				
 				//timer slider
 				simSpeed.setPreferredSize(new Dimension(128, 32));
-				simSpeed.setMajorTickSpacing(10);
+				simSpeed.setForeground(Color.white);
+				simSpeed.setMajorTickSpacing(5);
 				simSpeed.setMinorTickSpacing(1);
 				simSpeed.setPaintTicks(true);
 				simSpeed.setPaintLabels(true);

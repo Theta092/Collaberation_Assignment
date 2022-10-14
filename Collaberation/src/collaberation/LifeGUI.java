@@ -8,6 +8,7 @@
 *                                    
 * Nicholas Rempel
 * Zachary Nickel
+* Logan Sawatzky
 * Oct 14, 2022
 * a version of Conway's game of life.
 */

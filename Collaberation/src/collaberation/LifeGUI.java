@@ -49,6 +49,7 @@ public class LifeGUI {
 	public LifeGUI() {
 		
 		frame = new JFrame("Life");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(240, 280);
 		frame.setLocationRelativeTo(null);
 		
@@ -251,12 +252,13 @@ public class LifeGUI {
 					}
 					
 				});
-				simSpeed.setOrientation(SwingConstants.HORIZONTAL);
+				simSpeed.setBackground(Color.decode("#5F5F5F"));
+				simSpeed.setForeground(Color.white);
+				simSpeed.setBorder(BorderFactory.createLineBorder(Color.black));
 				c.gridx = 2;
 				c.gridwidth = 4;
 				c.gridy = 0;
 				run.add(simSpeed, c);
-				
 				
 				//play button
 				play = new JButton(playIcon);

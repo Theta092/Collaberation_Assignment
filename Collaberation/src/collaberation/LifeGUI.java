@@ -252,6 +252,7 @@ public class LifeGUI {
 						{
 							timerSpeed = 1000 - (tickSpeed * 90);
 							timer.setDelay(timerSpeed);
+							timer.start();
 						}
 					}
 					
